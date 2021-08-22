@@ -8,11 +8,13 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import ElementClickInterceptedException
+from selenium.common.exceptions import TimeoutException
 from selenium.common.exceptions import InvalidElementStateException
 from selenium.common.exceptions import NoSuchElementException
 
 from Screenshot import Screenshot_Clipping
 from datetime import datetime
+
 
 class Baseutility:
     # read configurations from project config
@@ -153,6 +155,9 @@ class Baseutility:
                 self.set_log("info", "element " + selector + " is clickable")
         except NoSuchElementException:
             self.set_log("error", "Element not present for web element: " + selector)
+        except TimeoutException:
+            self.set_log("error", "Timeout exception for web element: " + selector)
+            self.take_screenshot(driver)
 
     # Get text for web object
     def get_text(self, element):
@@ -173,3 +178,13 @@ class Baseutility:
         screensshot_path = self.read_config("platform", "screenshot_path")
         file_name = f'{datetime.today().strftime("%Y-%m-%d_%H:%M:%S")}.png'
         driver.save_screenshot(screensshot_path + file_name)
+
+    # Scroll to page end
+    def scroll_down_to_pageend(self, driver):
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        self.set_log("info", "scrolling down to page end")
+
+    # Clear cookies
+    def clear_cookies(self, driver):
+        driver.delete_all_cookies()
+        self.set_log("info", "clearing cookies")

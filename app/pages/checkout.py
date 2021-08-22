@@ -33,3 +33,10 @@ class Checkout(Driverutility, Assertutility):
             "Actual: %s and expected: %s results are different" % (actual_item_text, expected_item_text.get("data"))
         )
         super().take_screenshot(driver)
+
+    def add_to_cart(self, driver):
+        driver.find_element(By.XPATH, Selectors.ADDINGTOCART).click()
+        super().check_element_present(driver, "xpath", Selectors.ITEMINCART)
+        super().scroll_down_to_pageend(driver)
+        driver.find_element(By.XPATH, Selectors.GOTOCART).click()
+        super().take_screenshot(driver)

@@ -4,3 +4,4 @@ app/data/~$platformdata.xlsx
 app/.pytest_cache
 .idea/
 *.pyc
+*.png

@@ -7,3 +7,7 @@ class Selectors:
     PRODUCTIMG = "//body/div[@id='root']/div[1]/div[4]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/" \
                  "div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]"
     ITEMHEAD = "//h1[contains(text(),'Canon EOS Rebel T7 DSLR Camera with 18-55mm IS Len')]"
+    ADDINGTOCART = "//body/div[@id='root']/div[1]/div[4]/div[1]/div[2]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]" \
+                   "/form[1]/button[1]"
+    ITEMINCART = "//p[contains(text(),'This item has been added to your cart.')]"
+    GOTOCART = "//span[contains(text(),'Go to Cart')]"

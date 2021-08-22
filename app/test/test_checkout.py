@@ -9,7 +9,11 @@ class Testcheckout(Checkout):
         site_url = super().read_config("platform", "site")
         driver.get(site_url)
 
+        # Clear site cookies
+        super().clear_cookies(driver)
+
         super().search_product(driver)
         super().click_product(driver)
+        super().add_to_cart(driver)
 
         driver.quit()
