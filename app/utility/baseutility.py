@@ -2,7 +2,14 @@ import json
 import pandas as pd
 import logging
 import sys
+
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.common.exceptions import ElementClickInterceptedException
+from selenium.common.exceptions import InvalidElementStateException
+from selenium.common.exceptions import NoSuchElementException
 
 
 class Baseutility:
@@ -75,3 +82,39 @@ class Baseutility:
         else:
             element.send_keys(Keys.ENTER)
         self.set_log("info", "Press enter through key strokes")
+
+    # Fluent wait
+    def wait_until_clickable(self, driver, selector_type, selector):
+        try:
+            if selector_type == "xpath":
+                element = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, selector)))
+                self.set_log("info", "clicking on element: " + selector)
+                element.click()
+            if selector_type == "css":
+                element = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, selector)))
+                self.set_log("info", "clicking on element: " + selector)
+                element.click()
+            if selector_type == "id":
+                element = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, selector)))
+                self.set_log("info", "clicking on element: " + selector)
+                element.click()
+            if selector_type == "class_name":
+                element = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CLASS_NAME, selector)))
+                self.set_log("info", "clicking on element: " + selector)
+                element.click()
+            if selector_type == "link_text":
+                element = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.LINK_TEXT, selector)))
+                self.set_log("info", "clicking on element: " + selector)
+                element.click()
+            if selector_type == "name":
+                element = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.NAME, selector)))
+                self.set_log("info", "clicking on element: " + selector)
+                element.click()
+            if selector_type not in ["xpath", "css", "id", "class_name", "link_text", "name", "tag"]:
+                self.set_log("error", "selector type not available")
+        except NoSuchElementException:
+            self.set_log("error", "element not found for " + selector)
+        except ElementClickInterceptedException:
+            self.set_log("error", "element is not clickable at point for " + selector)
+        except InvalidElementStateException:
+            self.set_log("error", "invalid element state exception for " + selector)
