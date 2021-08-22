@@ -44,9 +44,18 @@ class Baseutility:
 
             val = df[df['product_type'].str.contains(keyword)]
 
+        if data_type == "assert":
+            df = pd.read_excel(
+                platformdata_path,
+                sheet_name="assert_data"
+            )
+
+            val = df[df['assert_keyword'].str.contains(keyword)]
+
         if val.empty:
             raise ValueError("Empty data returned")
         else:
+            self.set_log("info", "Fetching data for data type: %s and keyword: %s" % (data_type, keyword))
             return val.to_dict('records')[0]
 
     # Set log based on message type
@@ -83,7 +92,7 @@ class Baseutility:
             element.send_keys(Keys.ENTER)
         self.set_log("info", "Press enter through key strokes")
 
-    # Fluent wait
+    # Fluent wait for clickable
     def wait_until_clickable(self, driver, selector_type, selector):
         try:
             if selector_type == "xpath":
@@ -118,3 +127,31 @@ class Baseutility:
             self.set_log("error", "element is not clickable at point for " + selector)
         except InvalidElementStateException:
             self.set_log("error", "invalid element state exception for " + selector)
+
+    # Fluent wait to check for element is present
+    def check_element_present(self, driver, selector_type, selector):
+        try:
+            if selector_type == "xpath":
+                WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, selector)))
+                self.set_log("info", "element " + selector + " is found")
+            if selector_type == "css":
+                WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, selector)))
+                self.set_log("info", "element " + selector + " is found")
+            if selector_type == "id":
+                WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, selector)))
+                self.set_log("info", "element " + selector + " is clickable")
+            if selector_type == "class_name":
+                WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, selector)))
+                self.set_log("info", "element " + selector + " is clickable")
+            if selector_type == "link_text":
+                WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.LINK_TEXT, selector)))
+                self.set_log("info", "element " + selector + " is clickable")
+            if selector_type == "name":
+                WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, selector)))
+                self.set_log("info", "element " + selector + " is clickable")
+        except NoSuchElementException:
+            self.set_log("error", "Element not present for web element: " + selector)
+
+    # Get text for web object
+    def get_text(self, element):
+        return element.text.strip()

@@ -11,5 +11,8 @@ class Testcheckout(Checkout):
         driver.get(site_url)
 
         super().search_product(driver)
+        super().click_product(driver)
 
         sleep(5)
+
+        driver.quit()
