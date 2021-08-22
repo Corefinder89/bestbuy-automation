@@ -1,5 +1,6 @@
 venv/
 app/staticfiles/log/*.log
 app/data/~$platformdata.xlsx
+app/.pytest_cache
 .idea/
 *.pyc

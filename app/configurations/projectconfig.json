@@ -1,10 +1,13 @@
 {
   "data": {
-    "platformdata": "../app/data/platformdata.xlsx"
+    "platformdata": "app/data/platformdata.xlsx"
   },
   "browser_config": {
-    "headless_status": "headless",
+    "headless_status": false,
     "linux_chromedriver": "app/drivers/linux/chromedriver",
     "mac_chromedriver": "app/drivers/mac/chromedriver"
+  },
+  "platform": {
+    "site": "https://www.bestbuy.ca/en-ca/"
   }
 }

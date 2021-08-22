@@ -1,9 +1,12 @@
 import json
 import pandas as pd
 import logging
+import sys
+from selenium.webdriver.common.keys import Keys
 
 
 class Baseutility:
+    # read configurations from project config
     def read_config(self, p_datatype, c_datatype):
         with open("app/configurations/projectconfig.json") as fobj:
             read_json = json.load(fobj)
@@ -14,6 +17,7 @@ class Baseutility:
         else:
             raise ValueError("None type returned for association " + p_datatype + " -> " + c_datatype)
 
+    # read data from excel sheet
     def read_data(self, data_type, keyword):
         platformdata_path = self.read_config("data", "platformdata")
         val = None
@@ -38,6 +42,7 @@ class Baseutility:
         else:
             return val.to_dict('records')[0]
 
+    # Set log based on message type
     def set_log(self, log_type, msg):
         logging.basicConfig(filemode='w')
 
@@ -56,8 +61,17 @@ class Baseutility:
         if log_type == "critical":
             logger.critical(msg)
 
+    # set window size of the browser when running headless
     def set_windowsize(self, driver, height, width):
         window_height = int(height)
         window_width = int(width)
         self.set_log("info", "setting window size to " + str(window_width) + "x" + str(window_height))
         driver.set_window_size(window_height, window_width)
+
+    # replicate key press enter
+    def select_input(self, element):
+        if sys.platform.lower() == "darwin":
+            element.send_keys(Keys.RETURN)
+        else:
+            element.send_keys(Keys.ENTER)
+        self.set_log("info", "Press enter through key strokes")
