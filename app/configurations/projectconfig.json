@@ -8,6 +8,7 @@
     "mac_chromedriver": "app/drivers/mac/chromedriver"
   },
   "platform": {
-    "site": "https://www.bestbuy.ca/en-ca/"
+    "site": "https://www.bestbuy.ca/en-ca/",
+    "screenshot_path": "app/staticfiles/screenshots/"
   }
 }

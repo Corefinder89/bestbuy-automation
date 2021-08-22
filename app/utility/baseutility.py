@@ -11,6 +11,8 @@ from selenium.common.exceptions import ElementClickInterceptedException
 from selenium.common.exceptions import InvalidElementStateException
 from selenium.common.exceptions import NoSuchElementException
 
+from Screenshot import Screenshot_Clipping
+from datetime import datetime
 
 class Baseutility:
     # read configurations from project config
@@ -155,3 +157,19 @@ class Baseutility:
     # Get text for web object
     def get_text(self, element):
         return element.text.strip()
+
+    # Take full page screenshot
+    def take_fullpage_screenshot(self, driver):
+        file_name = f'{datetime.today().strftime("%Y-%m-%d_%H:%M:%S")}.png'
+        screenshot_obj = Screenshot_Clipping.Screenshot()
+        screenshot_obj.full_Screenshot(
+            driver,
+            save_path=self.read_config("platform", "screenshot_path"),
+            image_name=file_name
+        )
+
+    # Take screenshot of the current screen
+    def take_screenshot(self, driver):
+        screensshot_path = self.read_config("platform", "screenshot_path")
+        file_name = f'{datetime.today().strftime("%Y-%m-%d_%H:%M:%S")}.png'
+        driver.save_screenshot(screensshot_path + file_name)

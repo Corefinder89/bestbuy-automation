@@ -6,3 +6,4 @@ class Selectors:
                "div[1]/div[1]/a[1]/div[1]/div[1]/div[2]/div[1]"
     PRODUCTIMG = "//body/div[@id='root']/div[1]/div[4]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/" \
                  "div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]"
+    ITEMHEAD = "//h1[contains(text(),'Canon EOS Rebel T7 DSLR Camera with 18-55mm IS Len')]"
