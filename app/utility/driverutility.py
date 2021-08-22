@@ -16,6 +16,8 @@ class Driverutility(Baseutility):
                 driver_path = super().read_config("browser_config", "mac_chromedriver")
             if platform.system().lower() == "linux":
                 driver_path = super().read_config("browser_config", "linux_chromedriver")
+            if platform.system().lower() == "windows":
+                driver_path = super().read_config("browser_config", "windows_chromedriver")
             if headless_status:
                 chrome_options = Options()
                 chrome_options.add_argument("--headless")

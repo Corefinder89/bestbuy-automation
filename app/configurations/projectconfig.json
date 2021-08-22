@@ -5,7 +5,8 @@
   "browser_config": {
     "headless_status": false,
     "linux_chromedriver": "app/drivers/linux/chromedriver",
-    "mac_chromedriver": "app/drivers/mac/chromedriver"
+    "mac_chromedriver": "app/drivers/mac/chromedriver",
+    "windows_chromedriver": "app/drivers/windows/chromedriver"
   },
   "platform": {
     "site": "https://www.bestbuy.ca/en-ca/",
