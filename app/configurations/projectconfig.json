@@ -6,8 +6,5 @@
     "headless_status": "headless",
     "linux_chromedriver": "app/drivers/linux/chromedriver",
     "mac_chromedriver": "app/drivers/mac/chromedriver"
-  },
-  "log": {
-    "log_file": "app/staticfiles/log/platform.log"
   }
 }
