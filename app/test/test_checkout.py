@@ -1,5 +1,4 @@
 from app.pages.checkout import Checkout
-from time import sleep
 
 
 class Testcheckout(Checkout):
@@ -12,7 +11,5 @@ class Testcheckout(Checkout):
 
         super().search_product(driver)
         super().click_product(driver)
-
-        sleep(5)
 
         driver.quit()
