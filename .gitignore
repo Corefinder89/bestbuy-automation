@@ -1,5 +1,5 @@
 venv/
-app/staticfiles/log
+app/staticfiles/log/*.log
 app/data/~$platformdata.xlsx
 .idea/
 *.pyc
