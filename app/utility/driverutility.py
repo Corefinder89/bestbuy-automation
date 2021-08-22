@@ -20,6 +20,8 @@ class Driverutility(Baseutility):
                 driver_path = super().read_config("browser_config", "windows_chromedriver")
             if headless_status:
                 chrome_options = Options()
+                chrome_options.add_argument('--disable-blink-features=AutomationControlled')
+                super().set_log("info", "Add option to devoid bot")
                 chrome_options.add_argument("--headless")
                 super().set_log("info", "set headless argument")
                 chrome_options.add_argument("--no-sandbox")
@@ -33,6 +35,9 @@ class Driverutility(Baseutility):
                 super().set_log("info", "web driver intialized for chrome")
             else:
                 super().set_log("info", "Setting driver path to " + driver_path)
+                chrome_options = Options()
+                chrome_options.add_argument('--disable-blink-features=AutomationControlled')
+                super().set_log("info", "Add option to devoid bot")
                 driver = webdriver.Chrome(executable_path=driver_path)
                 driver.implicitly_wait(10)
                 super().set_log("info", "Adding implicit wait time")
