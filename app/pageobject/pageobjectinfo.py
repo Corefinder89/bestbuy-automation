@@ -11,3 +11,4 @@ class Selectors:
                    "/form[1]/button[1]"
     ITEMINCART = "//p[contains(text(),'This item has been added to your cart.')]"
     GOTOCART = "//span[contains(text(),'Go to Cart')]"
+    YOURCART = "//h1[contains(text(),'Your Cart')]"

@@ -2,6 +2,7 @@ from app.pageobject.pageobjectinfo import Selectors
 from app.utility.driverutility import Driverutility
 from app.utility.assertutility import Assertutility
 from selenium.webdriver.common.by import By
+from time import sleep
 
 
 class Checkout(Driverutility, Assertutility):
@@ -38,5 +39,7 @@ class Checkout(Driverutility, Assertutility):
         driver.find_element(By.XPATH, Selectors.ADDINGTOCART).click()
         super().check_element_present(driver, "xpath", Selectors.ITEMINCART)
         super().scroll_down_to_pageend(driver)
-        driver.find_element(By.XPATH, Selectors.GOTOCART).click()
+        super().wait_until_clickable(driver, "xpath", Selectors.GOTOCART)
+        super().check_element_present(driver, "xpath", Selectors.YOURCART)
+        sleep(4)
         super().take_screenshot(driver)

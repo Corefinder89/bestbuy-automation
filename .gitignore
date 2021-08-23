@@ -5,3 +5,5 @@ app/.pytest_cache
 .idea/
 *.pyc
 *.png
+.DS_Store
+app/.DS_Store
